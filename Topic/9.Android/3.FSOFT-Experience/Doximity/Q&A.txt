@@ -1,0 +1,97 @@
+﻿Dear all,
+
+Do nhận được sự quan tâm và ủng hộ rất lớn của những người quan tâm đến ANDROID từ khắp các chi nhánh Fsoft. Em xin gửi lại Meeting Minutes của T-day tháng 3 liên quan đến ANDROID DEVELOPMENT do anh Chiển trình bày:
+
+
+AGENDA	 	 	 	 	 	 	 	 	 	 	
+1. Lí do tổ chức Seminar liên quan đến Android Development.
+2. Các lesson/practice trong việc quản lí dự án phát triển Android
+3. Các vấn đề  Technical liên quan đến Android 
+4. Q&A	
+	
+	
+
+CONTENT
+1. Lí do tổ chức Seminar liên quan đến ANDROID Development:
+   - FDM vừa kết thúc 1 dự án phát triển liên quan đến Android. dự án gặp rất nhiều vấn đề/tình huống về Project Management cũng như Technical rất hay có thể chia sẻ cho các dự án khác cùng rút kinh nghiệm.
+   - Android development là một mảng khá mới với FSOFT và đang được nhiều Fsofter quan tâm.
+2. Các lesson/practice trong việc quản lí và  phát triển Android:
+	Overview về dự án:
+	Scope:
+                                    - SRS;Design;Coding;Unit Test;Integration Test;System Test
+	Project Overview:
+Doximity (San Mateo CA based) first launched a medical iPhone app (v2.0) to the App Store on 29 Sep 2010 and would like to port it over to Android. Doximity is a professional network for doctors. It combines certain utilities, like searching for 24 hour pharmacies in your area, with some fun - finding old med school classmates and seeing where they are today.
+The app has 3 main components:
+ 	Searching: People, pharmacies, hospitals and nursing homes
+ 	Connecting: Similar to other social networks, medical professionals can connect with one another. They can also share a private profile with people they have connected with.
+ 	Messaging: Probably the most complex piece of the software. After users connect with one another, they can send secure texts back and forth. For this, the Apple's push notification service was used.
+The app has Report Correction and Request new (phone) list which are useful features of the app to collect feedback from users to improve the correctness and fullness of the content/info.
+The next iPhone app version v2.1 will be out to the App Store soon which allows adding image attachments to the DocText and is expected the same feature will be added to the Android version as well.
+	Customer: Doximity.
+	Start Date: 21-Oct-10
+	End Date: 15-Mar-11
+	
+  2.1. Project Management:
+     - Từ đầu dự án nhận được Input từ phía khách hàng rất sơ sài, chỉ có . iPhone sourcecode, Website, WebServices API docs (pure), Test Case,máy Motorola DROID 2
+Nên yêu cầu của dự án là:
+    => Cần Dev có kinh nghiệm về cả Iphone và Android. Đây là yêu cầu rất khó tìm tại Fsoft
+    => Quyết định Outsource dự án ra cho công ty bên ngoài làm, nên phát sinh các rủi ro như: Communication, Quality Control, Deadline.
+
+  2.2. Select Vendor and Contract Agreement:
+   Do trong lúc lựa chon Vendor, dự án đã không làm tốt việc đánh giá Sub-contractor, mà chỉ lựa chọn thông qua sự giới thiệu,  và tìm hiểu profile của Vendor( Lumos) ặt khác thời điểm đó không có nhiều candidate để lựa chọn nên dẫn đến nhiều Issue về sau trong dự án.
+  Mặc dù dự án đã kí hợp đồng với Sub-contractor nhưng các điều khoản trong hợp đồng lại không rõ ràng, không tạo được áp lực cho Sub-contractor.
+=> Suggestion:
+   - Cần có quá trình đánh giá Sub-contractor về thực lực, về mô hình làm việc và mindset trong công việc.
+   - Khi làm proposal với khách hàng nên đánh giá thêm thời gian thực hiện Test trên nhiều thiết bị thật ( Samsung, Motorola, HTC), và cần có buffer thời gian trong các Milestone của dự án với khách hàng so với Milestone của dự án và Sub-contractor.
+
+2.3. Select Vendor and Contract Agreement:
+   Do trong lúc lựa chon Vendor, dự án đã không làm tốt việc đánh giá Sub-contractor, mà chỉ lựa chọn thông qua sự giới thiệu,  và tìm hiểu profile của Vendor( Lumos) ặt khác thời điểm đó không có nhiều candidate để lựa chọn nên dẫn đến nhiều Issue về sau trong dự án.
+  Mặc dù dự án đã kí hợp đồng với Sub-contractor nhưng các điều khoản trong hợp đồng lại không rõ ràng, không tạo được áp lực cho Sub-contractor.
+=> Suggestion:
+   - Cần có quá trình đánh giá Sub-contractor về thực lực, về mô hình làm việc và mindset trong công việc.
+   - Khi làm proposal với khách hàng nên đánh giá thêm thời gian thực hiện Test trên nhiều thiết bị thật ( Samsung, Motorola, HTC), và cần có buffer thời gian trong các Milestone của dự án với khách hàng so với Milestone của dự án và Sub-contractor. 
+   
+  2.4. Sub-Contractor Management:
+Do trong quá trình làm hợp đồng chưa có nhiều điều khoản rõ ràng nên dự án gặp phải rất nhiều khó khăn :
+   - Việc communicate không thông suốt, rất nhiều lần bên FDM sử dụng các phương tiện liên lạc: chat, email, call nhưng đều không có feedback từ Lumos.
+   - Tiến độ làm việc của Lumos chậm, không theo Deadline đã đề ra.
+   - Chất lượng sản phẩm do Lumos tạo ra rất thấp, chưa đạt tiêu chuẩn nên cần mất nhiều effort để sửa lỗi.
+
+  2.5. Onsite Candidate Interview:
+  - Quá trình chọn Onsiter cần lưu ý đến các tiêu chí: kĩ năng về technique, khả năng ngoại ngữ và đặc biệt cần có Motivation
+
+  2.6. Negotiation:
+   - Dự án đã không làm tốt Proposal => Suggest: Cần negotiate với khách hàng ngay từ gian đoạn làm Proposal: Effort cho UT nên là 200% effort Coding. Lí do: Cần test trên nhiều thiết bị thật, mà mỗi thiết bị lại có phần Core riêng.
+   - Cần negotiate với khách hàng trong trường hợp phải re-schedule
+
+3. Các vấn đề  Technical liên quan đến Android:
+	Database: Sử dụng SQLite
+	Cơ chế gửi/ nhận dữ liệu: Sử dụng HTTP Request and HTTP Response => có thể dùng Tool HTTP Request and Response Debuggers, Wireshark để tracking việc gửi và nhận dữ liệu.
+	Thiết bị Test: Suggest là nên có thiết bị Hard-keyboard để test các trường hợp đang chạy ứng dụng thì close hard-keyboard lại.
+	Deployment: Có thể dùng Tool Hudson, để trace lại history của các bản build. Ngoài ra, tool này còn warning khi các bản build bị lỗi.
+	Design Tool: Pencel - dùng để vẽ UI Design. 
+	Các lỗi thường gặp trong dự án Android: Intent Manager (Customize to control flows among activities), Google Maps(Show current Location and Display Map Pins) – zoom and pan, Force Close (Samsung Galaxy S), Notification (inside or outside of the app), Drag and Drop (SpeedDial list), Zoom Image (one-finger zoom) – 1.6, Crop and Scale Image (using Intent), Capturing images(Various Android hardwares)
+	Publishing an Android app to Android Market: 
+o	Đăng kí Google Accounts.
+o	Active tài khoản tren Android Market ( phí là 25$)
+o	Upload ứng dụng.
+	Chuẩn bị file APK:
+                         Start =>Add EULA => icon and label => Turn off logging/debugging => Versioning => Sign and Align => Testing => End
+
+4. Q&A:
+Q: Làm sao để đảm bảo Proposal đúng hạn khi bên Outsource thực hiện Proposal
+A: Bên Outsource cũng thức ngày đêm để làm Proposal đúng hạn. Ngoài ra, đội dự án cũng có cơ chế tracking kịp thời, tránh trường hợp đến cuối Deadline mới hỏi đến tiến độ.
+Q: Làm sao để việc trả lời Q&A với khách hàng được thông suốt khi communicate 3 tầng
+A: Thực tế thì đây cũng là Issue mà dự án gặp phải.
+Q: SQLite khác gì so với Database trong Webservice ?
+A: SQLite được sử dụng làm database đệm trong ứng dụng, tránh việc đồng bộ dữ liệu mỗi lần khởi động ứng dụng.
+Q: HTTP Scoop có sử dụng được trên Browser không ?
+A: Không. Để sử dụng trên Browser thì có thể dùng các add-ons có sẵn của Firefox.
+Q: Quá trình convert được thực hiện bằng tay hay bàng tool ?
+                       A: Bằng tay.
+Q: Vậy tại sao không nghĩ đến việc viết Tool để convert ?
+A: Có nhiều lí do: nếu dùng tool thì cũng chỉ convert được 1 phần của Code, ngôn ngữ dùng trên Iphone là Objective C nên rất khó để convert, duration dự án ngắn nên không thể mạo hiểm bỏ thời gian ra để viết tool.
+
+Về phần Report, và các ý kiến đánh giá về buổi T-day, nhờ mọi người xem giúp trong file attach ạ.
+
+          Mọi thắc mắc xin liên hệ : ChienNT và TienLQ

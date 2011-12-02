@@ -1,0 +1,7 @@
+1. Set proxy for Android by comman line in SDK/tools
+
+adb pull /data/data/com.android.providers.settings/databases/settings.db settings.db 
+
+sqlite3 settings.db "INSERT INTO system VALUES(99,'http_proxy','10.16.37.112:8080');"
+
+adb push  settings.db /data/data/com.android.providers.settings/databases/settings.db
