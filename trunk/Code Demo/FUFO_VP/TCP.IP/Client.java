@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.ServerSocket;
 import java.net.Socket;
 
 import javax.swing.JButton;
@@ -28,7 +27,7 @@ public class Client  extends JFrame implements ActionListener {
 	 * 
 	 */
 	//private static final long serialVersionUID = 1L;
-	ServerSocket srvr;  
+	
 	Socket skt;
      BufferedReader in ;
      PrintWriter out ;
@@ -128,7 +127,7 @@ public class Client  extends JFrame implements ActionListener {
 		    	  // cung 1 may
 		    	  skt = new Socket("localhost", 1234);
 		    	  System.out.print("da ket noi voi server");
-		    	  jtfInput.addActionListener(this);
+		    	/*  jtfInput.addActionListener(this);
 		          in = new BufferedReader(new
 		            InputStreamReader(skt.getInputStream()));
 		          
@@ -138,7 +137,7 @@ public class Client  extends JFrame implements ActionListener {
 		         System.out.println(in.readLine()); // Read one line and output it
 
 		         System.out.print("\n");
-		         
+		         */
 		      }
 		      catch(Exception e1) {
 		         System.out.println(e1.getMessage());
@@ -179,13 +178,6 @@ public class Client  extends JFrame implements ActionListener {
 		   }
 	// Cleanup for disconnect
 	   private void cleanUp() {
-	      try {
-	         if (srvr != null) {
-	        	 srvr.close();
-	        	 srvr = null;
-	         }
-	      }
-	      catch (IOException e) { srvr = null; }
 
 	      try {
 	         if (skt != null) {
