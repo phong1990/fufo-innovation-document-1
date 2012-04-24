@@ -111,7 +111,7 @@ import javax.swing.JTextField;
 				          skt = srvr.accept();
 				        // text = "Hello Client";
 				         System.out.print("Server has connected!\n");
-				         
+				         /*
 				          out = new PrintWriter(skt.getOutputStream(), true);
 				          text = "HelloClient";
 				        // System.out.print("Sending string: '" + text + "'\n");
@@ -126,6 +126,7 @@ import javax.swing.JTextField;
 		                  } else {
 		                	  appendToChatBox("INCOMING: " + text + "\n");
 		                  }
+						  */
 
 				      }
 				      catch(Exception e1) {
