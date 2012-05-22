@@ -44,7 +44,8 @@ public class CameraActivity extends Activity {
 			preview.addView(mPreview);
 			Log.d("aop", "da vao3");
 			mCamera.setErrorCallback(new ErrorCallback() {
-				public void onError(int error, Camera camera) {
+				@Override
+                public void onError(int error, Camera camera) {
 					// do absolutely nothing!
 				}
 			});

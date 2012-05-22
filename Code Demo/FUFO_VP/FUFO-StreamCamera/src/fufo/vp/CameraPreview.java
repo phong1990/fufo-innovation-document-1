@@ -58,7 +58,8 @@ public class CameraPreview extends SurfaceView implements
          client.creatClient();
 	}
 
-	public void surfaceCreated(SurfaceHolder holder) {
+	@Override
+    public void surfaceCreated(SurfaceHolder holder) {
 		// The Surface has been created, now tell the camera where to draw the
 		// preview.
 		try {
@@ -87,13 +88,15 @@ public class CameraPreview extends SurfaceView implements
 		}
 	}
 
-	public void surfaceDestroyed(SurfaceHolder holder) {
+	@Override
+    public void surfaceDestroyed(SurfaceHolder holder) {
 		// Surface will be destroyed when we return, so stop the preview.
 		// Because the CameraDevice object is not a shared resource, it's very
 		// important to release it when the activity is paused.
 	}
 
-	public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
+	@Override
+    public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
 		// If your preview can change or rotate, take care of those events here.
 		// Make sure to stop the preview before resizing or reformatting it.
 
@@ -213,7 +216,7 @@ public class CameraPreview extends SurfaceView implements
 				// This process will make sure the value of Y is changed into
 				// integer with no
 				// damage.
-				int y = (0xff & ((int) NV21[yp]));
+				int y = (0xff & (NV21[yp]));
 				if (y < 0)
 					y = 0;
 				// 1 = 0000 0000 0000 0000 0000 0000 0000 0001
