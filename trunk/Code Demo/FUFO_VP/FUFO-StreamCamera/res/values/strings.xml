@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, CameraActivity!</string>
+    <string name="app_name">StreamCamera</string>
+        <color name="GRAY">#F1D07A</color>
+    <color name="tim">#7000CF</color>
+    <color name="timdam">#461B65</color>
+    <color name="red">#800000</color>
+    <color name="timdd">#370041</color>
+</resources>
