@@ -15,7 +15,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -25,33 +24,34 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.CompoundButton;
+import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class PerseusAndroid extends Activity implements OnClickListener, OnItemClickListener {
+public class PerseusAndroid extends Activity implements OnClickListener, OnItemClickListener, OnCheckedChangeListener {
 	//-- ROBOT --//
-	final static String			ROBO_BTADDR				= "00:1D:43:00:E4:78";
+	final static String			ROBO_BTADDR				= "00:12:02:15:60:12";
 	//-- debugging --//	
-	String 						LOG_TAG 				= "PerseusAndroid";
+	String 						LOG_TAG 				= "FUFO";
 	//-- GUI --//
-	final static String			m_szAppTitle			= "PerseusAndroid";
+	final static String			m_szAppTitle			= "FUFOAndroid";
 	TabHost						m_tabHost;
 	ListView					m_lvSearch;	
 	ProgressDialog				m_progDlg;
 	
 	TextView					m_tvD1, m_tvD2, m_tvD3;
-	
+	Button                      fwd,bck,rgt,lft,up,down;     
 	//-- Bluetooth functionality --//
 	
 	//BTNative					m_BT;					//obsolete
@@ -76,6 +76,8 @@ public class PerseusAndroid extends Activity implements OnClickListener, OnItemC
 								idTab2BCK			= Menu.FIRST + 3,
 								idTab2LFT			= Menu.FIRST + 4,
 								idTab2RGT			= Menu.FIRST + 5,
+								idTab2UP            = Menu.FIRST + 6,
+								idTab2DWN           = Menu.FIRST + 7,
 								idLVFirstItem			= Menu.FIRST + 100;	
 
 	class BTDev {
@@ -94,9 +96,12 @@ public class PerseusAndroid extends Activity implements OnClickListener, OnItemC
 	BTDev	BTDevs[];
 	int		BTCount;
 	
+	
+	
 	private View createTabContent1()
 	{
 		final Context context = PerseusAndroid.this;
+		
 		// Tab container
     	LinearLayout panel = new LinearLayout(context);
   		panel.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.WRAP_CONTENT));
@@ -134,11 +139,17 @@ public class PerseusAndroid extends Activity implements OnClickListener, OnItemC
     	lbBottom.setText("Press the button to discover Bluetooth devices");
     	lbBottom.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
      	panel.addView(lbBottom);
-
+     	
+     	
 	    
 	    return panel;
 	}
 	
+	LinearLayout panelH1;
+	LinearLayout panelH2;
+	LinearLayout panelH3;
+	Button but;
+	public RadioGroup checkControl;
 	private View createTabContent2()
 	{
 		final Context context = PerseusAndroid.this;
@@ -147,68 +158,108 @@ public class PerseusAndroid extends Activity implements OnClickListener, OnItemC
     	LinearLayout panel = new LinearLayout(context);
     	panel.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.WRAP_CONTENT));
     	panel.setOrientation(LinearLayout.VERTICAL);
+    	 checkControl = new RadioGroup(context);
+    	RadioButton checkControl1 = new RadioButton(context);
+    	checkControl1.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.WRAP_CONTENT));
+    	checkControl1.setText("Control via computer!");
+    //	panel.addView(checkControl1);
+    	RadioButton checkControl2 = new RadioButton(context);
+    	checkControl2.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.WRAP_CONTENT));
+    	checkControl2.setText("Control via Android Phone!");
+    	checkControl1.setId(5555);
+    	checkControl2.setId(5533);
+    	checkControl.addView(checkControl1);
+    	checkControl.addView(checkControl2);
+    	checkControl.check(5533);
+    	checkControl.setOnCheckedChangeListener(this);
+  
+        panel.addView(checkControl);
     	
-
-    	LinearLayout panelH = new LinearLayout(context);
-  		panelH.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.WRAP_CONTENT));
-  		panelH.setOrientation(LinearLayout.HORIZONTAL);
-  		panelH.setGravity(Gravity.CENTER);
-  		panelH.setGravity(Gravity.CENTER_VERTICAL);
-     	Button but = new Button(this);but.setText("____");but.setEnabled(false);but.setFocusable(false);but.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));panelH.addView(but);
-  		but = new Button(this);
-  		but.setText("FWD");
-  		but.setGravity(Gravity.CENTER);
-  		but.setId(idTab2FWD);
-  		but.setOnClickListener(this);
-  		but.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-     	panelH.addView(but);
-     	but = new Button(this);but.setText("____");but.setEnabled(false);but.setFocusable(false);but.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));panelH.addView(but);
-     	panel.addView(panelH);
+    	LinearLayout panelH1 = new LinearLayout(context);
+  		panelH1.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.WRAP_CONTENT));
+  		panelH1.setOrientation(LinearLayout.HORIZONTAL);
+  		panelH1.setGravity(Gravity.CENTER);
+  		panelH1.setGravity(Gravity.CENTER_VERTICAL);
+        but = new Button(this);but.setText("____");but.setEnabled(false);but.setFocusable(false);but.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));panelH1.addView(but);
+     	but.setVisibility(4);
+     	but = new Button(this);but.setText("____");but.setEnabled(false);but.setFocusable(false);but.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));panelH1.addView(but);
+        but.setVisibility(4);
+     	fwd = new Button(this);
+     	fwd.setText("FWD");
+     	fwd.setGravity(Gravity.CENTER);
+     	fwd.setId(idTab2FWD);
+     	fwd.setOnClickListener(this);
+     	fwd.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+     	panelH1.addView(fwd);
+     	but = new Button(this);but.setText("____");but.setEnabled(false);but.setFocusable(false);but.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));panelH1.addView(but);
+     	but.setVisibility(4);
+     	but = new Button(this);but.setText("____");but.setEnabled(false);but.setFocusable(false);but.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));panelH1.addView(but);
+     	but.setVisibility(4);
+     	up = new Button(this);
+     	up.setText("UUP");
+     	up.setGravity(Gravity.CENTER);
+     	up.setId(idTab2UP);
+     	up.setOnClickListener(this);
+        panelH1.addView(up);
+        up.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+     	but = new Button(this);but.setText("____");but.setEnabled(false);but.setFocusable(false);but.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));panelH1.addView(but);
+     	but.setVisibility(4);
      	
-     	panelH = new LinearLayout(context);
-     	panelH.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.WRAP_CONTENT));
-  		panelH.setOrientation(LinearLayout.HORIZONTAL);
-  		panelH.setGravity(Gravity.CENTER);
-  		panelH.setGravity(Gravity.CENTER_VERTICAL);
-  		but = new Button(this);
-  		but.setText("LFT");
-  		but.setId(idTab2LFT);
-  		but.setOnClickListener(this);
-  		but.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)); 		
-     	panelH.addView(but);
-     	but = new Button(this);but.setText("____");but.setEnabled(false);but.setFocusable(false);but.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));panelH.addView(but);
-  		but = new Button(this);
-  		but.setText("RGT");
-  		but.setId(idTab2RGT);
-  		but.setOnClickListener(this);
-  		but.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-     	panelH.addView(but);
-     	panel.addView(panelH);
+     	panel.addView(panelH1);
      	
-    	panelH = new LinearLayout(context);
-     	panelH.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.WRAP_CONTENT));
-  		panelH.setOrientation(LinearLayout.HORIZONTAL);
-  		panelH.setGravity(Gravity.CENTER);
-  		panelH.setGravity(Gravity.CENTER_VERTICAL);
-     	but = new Button(this);but.setText("____");but.setEnabled(false);but.setFocusable(false);but.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));panelH.addView(but);
-     	but = new Button(this);
-  		but.setText("BCK");
-  		but.setId(idTab2BCK);
-  		but.setOnClickListener(this);
-  		but.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-     	panelH.addView(but);
-     	but = new Button(this);but.setText("____");but.setEnabled(false);but.setFocusable(false);but.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));panelH.addView(but);
-     	panel.addView(panelH);
+     	LinearLayout panelH2 = new LinearLayout(context);
+     	panelH2.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.WRAP_CONTENT));
+  		panelH2.setOrientation(LinearLayout.HORIZONTAL);
+  		panelH2.setGravity(Gravity.CENTER);
+  		panelH2.setGravity(Gravity.CENTER_VERTICAL);
+  		but = new Button(this);but.setText("____");but.setEnabled(false);but.setFocusable(false);but.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));panelH2.addView(but);
+        but.setVisibility(4);
+  		lft = new Button(this);
+  		lft.setText("LFT");
+  		lft.setId(idTab2LFT);
+  		lft.setOnClickListener(this);
+  		lft.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)); 		
+     	panelH2.addView(lft);
+     	but = new Button(this);but.setText("____");but.setEnabled(false);but.setFocusable(false);but.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));panelH2.addView(but);
+     	but.setVisibility(4);
+     	rgt = new Button(this);
+     	rgt.setText("RGT");
+     	rgt.setId(idTab2RGT);
+     	rgt.setOnClickListener(this);
+     	rgt.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+     	panelH2.addView(rgt);
+     	panel.addView(panelH2);
+     	
+     	LinearLayout panelH3 = new LinearLayout(context);
+     	panelH3.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.WRAP_CONTENT));
+  		panelH3.setOrientation(LinearLayout.HORIZONTAL);
+  		panelH3.setGravity(Gravity.CENTER);
+  		panelH3.setGravity(Gravity.CENTER_VERTICAL);
+  		but = new Button(this);but.setText("____");but.setEnabled(false);but.setFocusable(false);but.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));panelH3.addView(but);
+        but.setVisibility(4);
+     	but = new Button(this);but.setText("____");but.setEnabled(false);but.setFocusable(false);but.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));panelH3.addView(but);
+     	but.setVisibility(4);
+     	bck = new Button(this);
+     	bck.setText("BCK");
+     	bck.setId(idTab2BCK);
+     	bck.setOnClickListener(this);
+     	bck.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+     	panelH3.addView(bck);
+     	but = new Button(this);but.setText("____");but.setEnabled(false);but.setFocusable(false);but.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));panelH3.addView(but);
+     	but.setVisibility(4);
+        but = new Button(this);but.setText("____");but.setEnabled(false);but.setFocusable(false);but.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));panelH3.addView(but);
+        but.setVisibility(4);
+        down = new Button(this);
+        down.setText("DWN");
+        down.setGravity(Gravity.CENTER);
+        down.setId(idTab2DWN);
+        down.setOnClickListener(this);
+        panelH3.addView(down);
+        down.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+        
+     	panel.addView(panelH3);
    
-     	m_tvD1 = new TextView(this);
-     	m_tvD1.setText("FRONT LEFT PING:");
-     	panel.addView(m_tvD1);
-     	m_tvD2 = new TextView(this);
-     	m_tvD2.setText("FRONT RIGHT PING:");
-     	panel.addView(m_tvD2);
-     	m_tvD3 = new TextView(this);
-     	m_tvD3.setText("TEMPERATURE:");
-     	panel.addView(m_tvD3);
+
   		
   		return panel;
 	}
@@ -238,7 +289,7 @@ public class PerseusAndroid extends Activity implements OnClickListener, OnItemC
         ImageView iv;
         
         ts = tabHost.newTabSpec("TAB_TAG_1");
-        ts.setIndicator("Search");
+        ts.setIndicator("Setting");
         ts.setContent(new TabHost.TabContentFactory()
         {
             public View createTabContent(String tag)
@@ -275,7 +326,7 @@ public class PerseusAndroid extends Activity implements OnClickListener, OnItemC
         
         //m_BT = new BTNative();
         BTDevs = new BTDev[MAX_DEVICES]; 
-        
+        Log.d("FUFO", "da connect bt");
         m_BluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         // If the adapter is null, then Bluetooth is not supported
         if (m_BluetoothAdapter == null) {
@@ -389,6 +440,26 @@ public class PerseusAndroid extends Activity implements OnClickListener, OnItemC
 					e.printStackTrace();
 				}
 		}
+		if (cmdId == idTab2UP)
+        {
+            if (m_btSck != null)
+                try {
+                    m_btSck.getOutputStream().write('o');
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+        }
+		if (cmdId == idTab2DWN)
+        {
+            if (m_btSck != null)
+                try {
+                    m_btSck.getOutputStream().write('p');
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+        }
 	}
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
@@ -516,7 +587,8 @@ public class PerseusAndroid extends Activity implements OnClickListener, OnItemC
 			e1.printStackTrace();
 		}
 		try { //This is a blocking call and will only return on a successful connection or an exception
-			m_btSck.connect();	             
+			m_btSck.connect();	
+			Log.d("FUFO", "da connect bt");
 		} catch (IOException e) {
              // Close the socket
              try { m_btSck.close();} catch (IOException e2) { e2.printStackTrace();}
@@ -564,7 +636,7 @@ public class PerseusAndroid extends Activity implements OnClickListener, OnItemC
 
 	                    // Send the obtained bytes to the UI Activity
 	                    Log.i(LOG_TAG, "StartReadThread: Data received:"+ bread);
-	                   
+	                    Log.i(LOG_TAG, "StartReadThread: Data received:"+ "day");
 	                } catch (IOException e) {
 	                	Log.d(LOG_TAG, "StartReadThread: disconnected", e);
 	                } 
@@ -612,10 +684,36 @@ public class PerseusAndroid extends Activity implements OnClickListener, OnItemC
 		}
 		return 0;
 	}
-	
+
+    /**
+     * [Explain the description for this method here].
+     * @param arg0
+     * @param arg1
+     * @see android.widget.RadioGroup.OnCheckedChangeListener#onCheckedChanged(android.widget.RadioGroup, int)
+     */
+    @Override
+    public void onCheckedChanged(RadioGroup arg0, int arg1) {
+        // TODO Auto-generated method stub
+        if(arg0.getCheckedRadioButtonId() == 5555){
+         
+           fwd.setEnabled(false);
+           bck.setEnabled(false);
+           lft.setEnabled(false);
+           rgt.setEnabled(false);
+           up.setEnabled(false);
+           down.setEnabled(false);
+        }
+        else {
+            fwd.setEnabled(true);
+            bck.setEnabled(true);
+            lft.setEnabled(true);
+            rgt.setEnabled(true);
+            up.setEnabled(true);
+            down.setEnabled(true);
+        }
+        
+    }
 
 
-
-    
 }
 
